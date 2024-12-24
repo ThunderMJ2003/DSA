@@ -8,31 +8,45 @@ using namespace std;
 // User function Template for C++
 class Solution {
   public:
-    string armstrongNumber(int n) {
+    // string armstrongNumber(int n) {
+    //     // code here
+    //     vector<int> narr;
+    //     int nlen = 0;
+    //     int ogn = n;
+    //     while (n>0){
+    //         narr.push_back(n%10);
+    //         n = n/10;
+    //         ++nlen;
+    //     }
+    //     int fin = 0;
+    //     int tx;
+    //     for (int i=0; i<nlen; i++){
+    //         tx = 1;
+    //         for (int j=0; j<nlen; j++){
+    //             tx = tx * narr[i];
+    //         }
+    //         fin = fin + tx;
+    //     }
+    //     if (fin==ogn){
+    //         return "true";
+    //     }
+    //     else{
+    //         return "false";
+    //     }
+    // }
+
+    bool armstrongNumber(int n) {
         // code here
-        vector<int> narr;
-        int nlen = 0;
         int ogn = n;
+        int newn = 0;
+        int numdig = log10(n)+1;
         while (n>0){
-            narr.push_back(n%10);
+            newn += round(pow((double)(n%10), (double)(numdig)));
+            //printf("%f \n", (pow((double)(n%10), (double)(numdig))));
             n = n/10;
-            ++nlen;
         }
-        int fin = 0;
-        int tx;
-        for (int i=0; i<nlen; i++){
-            tx = 1;
-            for (int j=0; j<nlen; j++){
-                tx = tx * narr[i];
-            }
-            fin = fin + tx;
-        }
-        if (fin==ogn){
-            return "true";
-        }
-        else{
-            return "false";
-        }
+        //printf("%d, %d \n", ogn, newn);
+        return (ogn==newn);
     }
 };
 
