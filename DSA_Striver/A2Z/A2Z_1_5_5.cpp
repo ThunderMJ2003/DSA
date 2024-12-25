@@ -8,12 +8,16 @@ using namespace std;
 
 class Solution {
   public:
-    long long sumOfSeries(long long n) {
-        // code here
-        if (n==1){
-            return 1;
-        }
-        return (sumOfSeries(n-1)+(n*n*n));
+    // long long sumOfSeries(long long n) {
+    //     // code here
+    //     if (n==1){
+    //         return 1;
+    //     }
+    //     return (sumOfSeries(n-1)+(n*n*n));
+    // }
+
+    long long sumOfSeries(long long n){
+        return round(pow((n*(n+1)/2), 2));
     }
 };
 
