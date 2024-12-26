@@ -12,15 +12,31 @@ using namespace std;
 class Solution
 {
     public:
-    string reverseWord(string str)
-    {
-        // Your code goes here
-        string revstr;
-        int n = str.length();
-        for (int i=0; i<n; i++){
-            revstr.push_back(str[n-i-1]);
+    // string reverseString(string str)
+    // {
+    //     // Your code goes here
+    //     string revstr;
+    //     int n = str.length();
+    //     for (int i=0; i<n; i++){
+    //         revstr.push_back(str[n-i-1]);
+    //     }
+    //     return revstr;
+    // }
+
+    // string reverseString(string& s) {
+    //     // code here
+    //     reverse(s.begin(), s.end());
+    //     return s;
+    // }
+
+    string reverseString(string& s) {
+        int i=0, j=s.size()-1;
+        while (i<j){
+            swap(s[i], s[j]);
+            ++i;
+            --j;
         }
-        return revstr;
+        return s;
     }
 };
 
@@ -37,11 +53,11 @@ int main() {
     	string s;
     	cin >> s;
     	Solution ob;
-    	cout << ob.reverseWord(s) << endl;
+    	cout << ob.reverseString(s) << endl;
 	}
 	return 0;
 	
 }
 
 
-// } Driver Code Ends
+//  Driver Code Ends
