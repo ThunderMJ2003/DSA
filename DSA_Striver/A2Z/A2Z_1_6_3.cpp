@@ -1,50 +1,79 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// int maxFrequency(vector<int>& nums, int k){
+//     map<int, int> numsfreq;
+//     for (int i=0; i<nums.size(); i++){
+//         ++numsfreq[nums[i]];
+//     }
+//     vector<int> elnum;
+//     vector<int> freqnum;
+//     for (auto i=numsfreq.begin(); i!=numsfreq.end(); i++){
+//         //printf("i->first = %d, i->second = %d \n", i->first, i->second);
+//         printf("%d %d \n", i->first, i->second);
+//         elnum.push_back(i->first);
+//         freqnum.push_back(i->second);
+//     }
+//     int j;
+//     int maxf = freqnum[0];
+//     int ogk = k;
+//     for (int i=1; i<elnum.size(); i++){
+//         j = i-1;
+//         k = ogk;
+//         int curfreq = freqnum[i];
+//         while ((k>0) && (j>=0)){
+//             //printf("i = %d, j = %d, elnum[i] = %d, elnum[j] = %d, k = %d, maxf = %d, freqnum[i] = %d, freqnum[j] = %d, curfreq = %d \n", i, j, elnum[i], elnum[j], k, maxf, freqnum[i], freqnum[j], curfreq);
+//             if (k >= (((long)(elnum[i]-elnum[j]))*((long)(freqnum[j])))){
+//                 k = k - ((elnum[i]-elnum[j])*freqnum[j]);
+//                 curfreq += freqnum[j];
+//                 maxf = max(maxf, curfreq);
+//                 --j;
+//                 continue;
+//             }
+//             else if ((elnum[i]-elnum[j]) > k){
+//                 maxf = max(maxf, curfreq);
+//                 break;
+//             }
+//             else{
+//                 //printf("in else block, i = %d, j = %d, elnum[i] = %d, elnum[j] = %d, k = %d, maxf = %d, freqnum[i] = %d, freqnum[j] = %d, curfreq = %d \n", i, j, elnum[i], elnum[j], k, maxf, freqnum[i], freqnum[j], curfreq);
+//                 curfreq += ((int)(k/(elnum[i]-elnum[j])));
+//                 k = k - (((int)(k/(elnum[i]-elnum[j])))*((elnum[i]-elnum[j])));
+//                 maxf = max(maxf, curfreq);
+//                 --j;
+//                 continue;
+//             }
+//         }
+//     }
+//     return maxf;
+// }
+
 int maxFrequency(vector<int>& nums, int k){
-    map<int, int> numsfreq;
-    for (int i=0; i<nums.size(); i++){
-        ++numsfreq[nums[i]];
-    }
-    vector<int> elnum;
-    vector<int> freqnum;
-    for (auto i=numsfreq.begin(); i!=numsfreq.end(); i++){
-        //printf("i->first = %d, i->second = %d \n", i->first, i->second);
-        printf("%d %d \n", i->first, i->second);
-        elnum.push_back(i->first);
-        freqnum.push_back(i->second);
-    }
-    int j;
-    int maxf = freqnum[0];
-    int ogk = k;
-    for (int i=1; i<elnum.size(); i++){
-        j = i-1;
-        k = ogk;
-        int curfreq = freqnum[i];
-        while ((k>0) && (j>=0)){
-            //printf("i = %d, j = %d, elnum[i] = %d, elnum[j] = %d, k = %d, maxf = %d, freqnum[i] = %d, freqnum[j] = %d, curfreq = %d \n", i, j, elnum[i], elnum[j], k, maxf, freqnum[i], freqnum[j], curfreq);
-            if (k >= (((long)(elnum[i]-elnum[j]))*((long)(freqnum[j])))){
-                k = k - ((elnum[i]-elnum[j])*freqnum[j]);
-                curfreq += freqnum[j];
-                maxf = max(maxf, curfreq);
-                --j;
-                continue;
-            }
-            else if ((elnum[i]-elnum[j]) > k){
-                maxf = max(maxf, curfreq);
-                break;
-            }
-            else{
-                //printf("in else block, i = %d, j = %d, elnum[i] = %d, elnum[j] = %d, k = %d, maxf = %d, freqnum[i] = %d, freqnum[j] = %d, curfreq = %d \n", i, j, elnum[i], elnum[j], k, maxf, freqnum[i], freqnum[j], curfreq);
-                curfreq += ((int)(k/(elnum[i]-elnum[j])));
-                k = k - (((int)(k/(elnum[i]-elnum[j])))*((elnum[i]-elnum[j])));
-                maxf = max(maxf, curfreq);
-                --j;
-                continue;
-            }
+    sort(nums.begin(), nums.end());
+    int n = nums.size();
+    int j=(n-1), i=(n-1);
+    int fin = j-i+1;
+    while(j>=0){
+        while( (i>0) && ((nums[j]-nums[i-1])<=k) ){
+            --i;
+            k = k - (nums[j]-nums[i]);
+        }
+        fin = max(fin, j-i+1);
+        if (fin == n){
+            return fin;
+        }
+        --j;
+        if (j<0){
+            break;
+        }
+        if (fin == 1){
+            --i;
+            k += (j-i)*(nums[j+1]-nums[j]);
+        }
+        else{
+            k += (j-i+1)*(nums[j+1]-nums[j]);
         }
     }
-    return maxf;
+    return fin;
 }
 
 int main(){
