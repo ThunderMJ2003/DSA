@@ -13,25 +13,42 @@ void swap(int *xp, int *yp)
 class Solution
 {
     public:
-    int select(int arr[], int i, int n)
-    {
-        // code here such that selectionSort() sorts arr[]
-        int arrmin = arr[i];
-        int minj = i;
-        for (int j=i; j<n; j++){
-            if (arrmin>arr[j]){
-                arrmin = arr[j];
-                minj = j;
-            }
-        }
-        return minj;
-    }
+    // int select(int arr[], int i, int n)
+    // {
+    //     // code here such that selectionSort() sorts arr[]
+    //     int arrmin = arr[i];
+    //     int minj = i;
+    //     for (int j=i; j<n; j++){
+    //         if (arrmin>arr[j]){
+    //             arrmin = arr[j];
+    //             minj = j;
+    //         }
+    //     }
+    //     return minj;
+    // }
      
-    void selectionSort(int arr[], int n)
-    {
-        //code here
+    // void selectionSort(int arr[], int n)
+    // {
+    //     //code here
+    //     for (int i=0; i<(n-1); i++){
+    //         swap(arr[select(arr, i, n)], arr[i]);
+    //     }
+    // }
+
+    void selectionSort(int arr[], int n) {
+        // code here
+        int newmin;
+        int newminind;
         for (int i=0; i<(n-1); i++){
-            swap(arr[select(arr, i, n)], arr[i]);
+            newmin = arr[i];
+            newminind = i;
+            for (int j=i; j<n; j++){
+                if (arr[j] < newmin){
+                    newmin = arr[j];
+                    newminind = j;
+                }
+            }
+            swap(arr[i], arr[newminind]);
         }
     }
 };
