@@ -19,25 +19,36 @@ using namespace std;
 class Solution
 {
     public:
-    void insert(int arr[], int i)
-    {
-        //code here
-        for (int j=i; j>0; j--){
-            if (arr[j-1]>arr[j]){
-                swap(arr[j-1], arr[j]);
-            }
-            else{
-                return;
-            }
-        }
-    }
-     public:
-    //Function to sort the array using insertion sort algorithm.
-    void insertionSort(int arr[], int n)
-    {
-        //code here
+    // void insert(int arr[], int i)
+    // {
+    //     //code here
+    //     for (int j=i; j>0; j--){
+    //         if (arr[j-1]>arr[j]){
+    //             swap(arr[j-1], arr[j]);
+    //         }
+    //         else{
+    //             return;
+    //         }
+    //     }
+    // }
+    //  public:
+    // //Function to sort the array using insertion sort algorithm.
+    // void insertionSort(int arr[], int n)
+    // {
+    //     //code here
+    //     for (int i=1; i<n; i++){
+    //         insert(arr, i);
+    //     }
+    // }
+
+    void insertionSort(int arr[], int n) {
+        // code here
         for (int i=1; i<n; i++){
-            insert(arr, i);
+            int j = i;
+            while ((j>0) && (arr[j-1] > arr[j])){
+                swap(arr[j-1], arr[j]);
+                --j;
+            }
         }
     }
 };
