@@ -10,24 +10,60 @@ class Solution {
   public:
     // Function returns the second
     // largest elements
+    // int print2largest(int arr[], int n) {
+    //     // code here
+    //     int max1 = arr[0];
+    //     int min1 = arr[0];
+    //     for (int i=0; i<n; i++){
+    //         max1 = max(max1, arr[i]);
+    //         min1 = min(min1, arr[i]);
+    //     }
+    //     if (max1==min1){
+    //         return -1;
+    //     }
+    //     int max2 = min1;
+    //     for (int i=0; i<n; i++){
+    //         if ((arr[i]>max2) && (arr[i]<max1)){
+    //             max2 = arr[i];
+    //         }
+    //     }
+    //     return max2;
+    // }
+
     int print2largest(int arr[], int n) {
-        // code here
-        int max1 = arr[0];
-        int min1 = arr[0];
-        for (int i=0; i<n; i++){
-            max1 = max(max1, arr[i]);
-            min1 = min(min1, arr[i]);
-        }
-        if (max1==min1){
+        // Code Here
+        if (n < 2){
             return -1;
         }
-        int max2 = min1;
-        for (int i=0; i<n; i++){
-            if ((arr[i]>max2) && (arr[i]<max1)){
-                max2 = arr[i];
+        int maxind = 0;
+        int secondmaxind = -1;
+        int i = 1;
+        while (i < n){
+            if (arr[i] < arr[maxind]){
+                secondmaxind = i;
+                break;
             }
+            else if (arr[i] > arr[maxind]){
+                maxind = i;
+                secondmaxind = 0;
+                break;
+            }
+            ++i;
         }
-        return max2;
+        if (secondmaxind == (-1)){
+            return -1;
+        }
+        while (i < n){
+            if (arr[i] > arr[maxind]){
+                secondmaxind = maxind;
+                maxind = i;
+            }
+            else if ((arr[i] < arr[maxind]) && (arr[i] > arr[secondmaxind])){
+                secondmaxind = i;
+            }
+            ++i;
+        }
+        return arr[secondmaxind];
     }
 };
 
