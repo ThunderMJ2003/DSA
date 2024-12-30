@@ -8,17 +8,6 @@ using namespace std;
 // User function template for C++
 class Solution {
     public:
-    int removeDuplicates(vector<int>& nums){
-        int i = 1;
-        int n = nums.size();
-        for (int j=1; j<n; j++){
-            if (nums[i-1] != nums[j]){
-                nums[i] = nums[j];
-                ++i;
-            }
-        }
-        return i;
-    }
     // int removeDuplicates(vector<int>& nums){
     //     vector<int> onlyuniques;
     //     onlyuniques.push_back(nums[0]);
@@ -35,6 +24,32 @@ class Solution {
     //     }
     //     return fin;
     // }
+
+    // int removeDuplicates(vector<int>& nums){
+    //     int i = 1;
+    //     int n = nums.size();
+    //     for (int j=1; j<n; j++){
+    //         if (nums[i-1] != nums[j]){
+    //             nums[i] = nums[j];
+    //             ++i;
+    //         }
+    //     }
+    //     return i;
+    // }
+
+    int removeDuplicates(vector<int>& nums) {
+        if (nums.size() < 2){
+            return nums.size();
+        }
+        int i=1;
+        for (int j=1; j<nums.size(); j++){
+            if (nums[j] != nums[i-1]){
+                nums[i] = nums[j];
+                ++i;
+            }
+        }
+        return i;
+    }
 };
 
 //{ Driver Code Starts.
