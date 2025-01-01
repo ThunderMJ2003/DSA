@@ -8,12 +8,35 @@ using namespace std;
 // User function template for C++
 class Solution {
     public:
+    // void rotate(vector<int>& nums, int k) {
+    //     vector <int> fin(nums.size());
+    //     for (int i=0; i<nums.size(); i++){
+    //         fin[(i+k)%(nums.size())] = nums[i];
+    //     }
+    //     nums = fin;
+    // }
+
+    // void rotate(vector<int>& nums, int k) {
+    //     vector<int> tempnums;
+    //     int n = nums.size();
+    //     k = k % n;
+    //     for (int i=0; i<k; i++){
+    //         tempnums.push_back(nums[n-k+i]);
+    //     }
+    //     for (int i=(n-k-1); i>=0; i--){
+    //         nums[i+k] = nums[i];
+    //     }
+    //     for (int i=0; i<k; i++){
+    //         nums[i] = tempnums[i];
+    //     }
+    // }
+
     void rotate(vector<int>& nums, int k) {
-        vector <int> fin(nums.size());
-        for (int i=0; i<nums.size(); i++){
-            fin[(i+k)%(nums.size())] = nums[i];
-        }
-        nums = fin;
+        int n = nums.size();
+        k = k % n;
+        reverse(nums.begin(), nums.end());
+        reverse(nums.begin(), nums.begin()+k);
+        reverse(nums.begin()+k, nums.end());
     }
 };
 
